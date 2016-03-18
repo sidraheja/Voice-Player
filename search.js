@@ -35,8 +35,8 @@ if (annyang)
       $("#speech").text("You said " + song);
       var searchFinal = song;
       searchFinal = searchFinal.replace(/ /g, "+");   //replaces all whitespaces with a "+" to make the url work
-      var url = "https://gdata.youtube.com/feeds/api/videos?q=" + searchFinal +"&format=5&max-results=7&v=2&alt=jsonc"; 
-
+      https://www.googleapis.com/youtube/v3/search?part=snippet&q=sugar&key=
+      var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + searchFinal + "&key=AIzaSyD3nGJjuTxf4LUGO3WvYyd4UNoc7xMBXCQ"
       var songList = [];
       $.getJSON(url, function(person)
       {
@@ -140,7 +140,7 @@ function search()
   searchFinal = searchFinal.replace(/ /g, "+");
   $("#speech").text(searchFinal);
   
-  var url = "https://gdata.youtube.com/feeds/api/videos?q=" + searchFinal +"&format=5&max-results=7&v=2&alt=jsonc";
+  var url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + searchFinal + "&key=AIzaSyD3nGJjuTxf4LUGO3WvYyd4UNoc7xMBXCQ"
   console.log("you searched for: ");
   console.log(searchFinal); console.log(" found at: ");
   console.log(url);
@@ -151,13 +151,11 @@ function search()
     //var playId = person.data.items[0].id;
     //console.log(playId);
     //songList.push( String(playId) );
-    for (i = 0; i < MAXSONGS; i++)
-    {
-      //console.log(person.data.items[i]['id']);
-      var nextSong = String( person.data.items[i].id );
+      console.log(person.data.items[0].id['videoId']);
+      var nextSong = person.data.items[0].id['videoId'];
+      console.log(nextSong);
       songList.push(nextSong);
       console.log("stored "); console.log(nextSong);
-    }
 
     player.stopVideo();    
     player.loadPlaylist(songList);
